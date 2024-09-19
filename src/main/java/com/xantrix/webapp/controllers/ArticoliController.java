@@ -2,9 +2,14 @@ package com.xantrix.webapp.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.xantrix.webapp.dtos.PrezzoDto;
 import com.xantrix.webapp.exceptions.ErrorResponse;
+import com.xantrix.webapp.feign.PriceClient;
+import feign.FeignException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -44,6 +49,33 @@ public class ArticoliController {
 	@Autowired
 	private ResourceBundleMessageSource errMessage;
 
+	@Autowired
+	private PriceClient priceClient;
+
+	private double getPriceArt(String codArt, String idList, String header)
+	{
+		double prezzo = 0;
+		try{
+
+			PrezzoDto prezzoDto = (!idList.isEmpty() ? priceClient.getPriceArt2(header,codArt,idList):
+					priceClient.getDefPriceArt2(header,codArt));
+
+			log.info("Prezzo articolo "+ codArt + ": " + prezzoDto.getPrezzo());
+
+			if(prezzoDto.getSconto()>0) {
+				prezzo = prezzoDto.getPrezzo() * (1 - (prezzoDto.getPrezzo() /100));
+				prezzo*= 100;
+				prezzo = Math.round(prezzo);
+				prezzo/= 100;
+			}
+
+		} catch (FeignException ex) {
+			log.warning(String.format("Errore: %s",ex.getLocalizedMessage()));
+		}
+
+		return prezzo;
+	}
+
 
 	@Operation(summary = "Ricerca l'articolo per BARCODE", description = "Restituisce i dati dell'articolo in formato JSON",
 			tags = { "ArticoliDto" })
@@ -56,8 +88,10 @@ public class ArticoliController {
 	@GetMapping(value = "/cerca/barcode/{ean}", produces = "application/json")
 	@SneakyThrows
 	public ResponseEntity<ArticoliDto> listArtByEan(
-			@Parameter(description = "Barcode univo dell'articolo") @PathVariable("ean") String Ean) {
+			@Parameter(description = "Barcode univo dell'articolo") @PathVariable("ean") String Ean, HttpServletRequest httpRequest) {
 		log.info(String.format("****** Otteniamo l'articolo con barcode %s *******", Ean));
+
+		String authHeader = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
 
 		ArticoliDto articolo = articoliService.SelByBarcode(Ean);
 
@@ -66,6 +100,8 @@ public class ArticoliController {
 			log.warning(ErrMsg);
 			throw new NotFoundException(ErrMsg);
 		}
+
+		articolo.setPrezzo(getPriceArt(articolo.getCodArt(),"",authHeader));
 
 		return new ResponseEntity<>(articolo, HttpStatus.OK);
 	}
@@ -79,10 +115,14 @@ public class ArticoliController {
 			@ApiResponse(responseCode = "403", description = "Utente Non AUTORIZZATO ad accedere alle informazioni", content = @Content),
 			@ApiResponse(responseCode = "404", description = "L'articolo cercato NON è stato trovato!",
 					content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))) })
-	@GetMapping(value = "/cerca/codice/{codart}", produces = "application/json")
+	@GetMapping(value = {"/cerca/codice/{codart}","/cerca/codice/{codart}/{idlist}"}, produces = "application/json")
 	@SneakyThrows
-	public ResponseEntity<ArticoliDto> listArtByCodArt(@PathVariable("codart") String CodArt) {
+	public ResponseEntity<ArticoliDto> listArtByCodArt(@PathVariable("codart") String CodArt, @PathVariable("idlist") Optional<String> optidlist, HttpServletRequest httpRequest) {
 		log.info("****** Otteniamo l'articolo con codice " + CodArt + " *******");
+
+		String authHeader = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
+
+		String idList = (optidlist.orElse(""));
 
 		ArticoliDto articolo = articoliService.SelByCodArt(CodArt);
 
@@ -90,6 +130,8 @@ public class ArticoliController {
 			String ErrMsg = String.format("L'articolo con codice %s non e' stato trovato!", CodArt);
 			log.warning(ErrMsg);
 			throw new NotFoundException(ErrMsg);
+		} else{
+			articolo.setPrezzo(this.getPriceArt(articolo.getCodArt(),idList,authHeader));
 		}
 
 		return new ResponseEntity<>(articolo, HttpStatus.OK);
@@ -101,17 +143,26 @@ public class ArticoliController {
 			@ApiResponse(responseCode = "401", description = "Utente non AUTENTICATO", content = @Content),
 			@ApiResponse(responseCode = "403", description = "Utente Non AUTORIZZATO ad accedere alle informazioni", content = @Content),
 			@ApiResponse(responseCode = "404", description = "L'articolo cercato NON è stato trovato!", content = @Content) })
-	@GetMapping(value = "/cerca/descrizione/{filter}", produces = "application/json")
+	@GetMapping(value = {"/cerca/descrizione/{filter}","/cerca/descrizione/{filter}/{idlist}"}, produces = "application/json")
 	@SneakyThrows
-	public ResponseEntity<List<ArticoliDto>> listArtByDesc(@PathVariable("filter") String Filter) {
+	public ResponseEntity<List<ArticoliDto>> listArtByDesc(@PathVariable("filter") String Filter, @PathVariable("idlist") Optional<String> optidlist, HttpServletRequest httpRequest) {
 		log.info("****** Otteniamo gli articoli con Descrizione: " + Filter + " *******");
 
+		String authHeader = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
+
+		String idList = (optidlist.orElse(""));
+
 		List<ArticoliDto> articoli = articoliService.SelByDescrizione(Filter);
+
 
 		if (articoli.isEmpty()) {
 			String ErrMsg = String.format("Non e' stato trovato alcun articolo avente descrizione %s", Filter);
 			log.warning(ErrMsg);
 			throw new NotFoundException(ErrMsg);
+		} else {
+			articoli.forEach(articoliDto -> {
+				articoliDto.setPrezzo(getPriceArt(articoliDto.getCodArt(),idList, authHeader));
+			});
 		}
 
 		return new ResponseEntity<>(articoli, HttpStatus.OK);

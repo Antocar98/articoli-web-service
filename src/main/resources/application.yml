@@ -42,8 +42,24 @@ sicurezza:
   secret: $aBcDeFgHiJkLmNoPqRsTuVwXyZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
 
 # ==============================================================
-# = Livello Log di Sicurezza
+# = Proprietà Livello Log
+# = Default ERROR, WARN e INFO
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
 # ==============================================================
 logging:
+  file:
+    name: './logs/ArtSrv.log' #file inserito nella cartella logs
+    #path: "/logs"
+  pattern:
+    file: "%d{ dd-MM-yyyy } [%thread] %-5level %logger{36} - %msg%n"
+    #console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
+
+  # Livello del Log generale (default INFO)
   level:
+    root: INFO
+    # Livello di log specifico
     org.springframework.security: DEBUG
+    org.hibernate: INFO
+    org.springframework.web: INFO
+    com.xantrix.webapp.controller: INFO
+    com.xantrix.webapp.feign.PriceClient: DEBUG
