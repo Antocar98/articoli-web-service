@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "gestuser.srv-url",
+    "type": "java.lang.String",
+    "description": "A description for 'gestuser.srv-url'"
+  },
+  {
+    "name": "gestuser.userId",
+    "type": "java.lang.String",
+    "description": "A description for 'gestuser.userId'"
+  },
+  {
+    "name": "gestuser.password",
+    "type": "java.lang.String",
+    "description": "A description for 'gestuser.password'"
+  }
+]}

@@ -1,0 +1,112 @@
+2024-09-16 11:17:00.926  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Starting Application using Java 11.0.24 on MBP-HRPGHRW39C with PID 30136 (/Users/antonio.carnevale/Documents/MicroServices/articoli-web-service/target/classes started by antonio.carnevale in /Users/antonio.carnevale/Documents/MicroServices/articoli-web-service)
+2024-09-16 11:17:00.926  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : No active profile set, falling back to default profiles: default
+2024-09-16 11:17:01.016  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-16 11:17:01.020  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 1 JPA repository interfaces.
+2024-09-16 11:17:01.062  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5443 (https) 5051 (http)
+2024-09-16 11:17:01.062  INFO 30136 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-16 11:17:01.062  INFO 30136 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2024-09-16 11:17:01.066  INFO 30136 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-16 11:17:01.066  INFO 30136 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 139 ms
+2024-09-16 11:17:01.094  INFO 30136 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-16 11:17:01.095  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-09-16 11:17:01.112  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-09-16 11:17:01.112  INFO 30136 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2024-09-16 11:17:01.137  INFO 30136 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 11:17:01.137  INFO 30136 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:17:01.189  WARN 30136 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-16 11:17:01.340  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**', OPTIONS] with []
+2024-09-16 11:17:01.345  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ada12, org.springframework.security.web.context.SecurityContextPersistenceFilter@596c80d1, org.springframework.security.web.header.HeaderWriterFilter@4fcb191b, org.springframework.security.web.authentication.logout.LogoutFilter@67d76b3d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5eb7cf17, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1cfd2aa1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@be9ebe4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@490716, org.springframework.security.web.session.SessionManagementFilter@87b386d, org.springframework.security.web.access.ExceptionTranslationFilter@c7925b8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4b4454c5]
+2024-09-16 11:17:01.469  INFO 30136 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-16 11:17:01.470  INFO 30136 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-09-16 11:17:01.540  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5443 (https) 5051 (http) with context path ''
+2024-09-16 11:17:01.544  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Started Application in 0.638 seconds (JVM running for 359.101)
+2024-09-16 11:17:01.546  INFO 30136 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   LogFileWebEndpointAutoConfiguration#logFileWebEndpoint matched:
+      - Log File found logging.file.name ArtSrv.log (LogFileWebEndpointAutoConfiguration.LogFileCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.boot.actuate.logging.LogFileWebEndpoint; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2024-09-16 11:17:07.971  INFO 30136 --- [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:17:07.972  INFO 30136 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-09-16 11:17:07.976  INFO 30136 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-09-16 11:17:08.025  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Starting Application using Java 11.0.24 on MBP-HRPGHRW39C with PID 30136 (/Users/antonio.carnevale/Documents/MicroServices/articoli-web-service/target/classes started by antonio.carnevale in /Users/antonio.carnevale/Documents/MicroServices/articoli-web-service)
+2024-09-16 11:17:08.025  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : No active profile set, falling back to default profiles: default
+2024-09-16 11:17:08.113  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-16 11:17:08.117  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 1 JPA repository interfaces.
+2024-09-16 11:17:08.156  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5443 (https) 5051 (http)
+2024-09-16 11:17:08.156  INFO 30136 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-16 11:17:08.156  INFO 30136 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2024-09-16 11:17:08.160  INFO 30136 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-16 11:17:08.160  INFO 30136 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 134 ms
+2024-09-16 11:17:08.186  INFO 30136 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-16 11:17:08.188  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2024-09-16 11:17:08.204  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2024-09-16 11:17:08.204  INFO 30136 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2024-09-16 11:17:08.228  INFO 30136 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 11:17:08.228  INFO 30136 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:17:08.276  WARN 30136 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-16 11:17:08.426  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**', OPTIONS] with []
+2024-09-16 11:17:08.431  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@392a528, org.springframework.security.web.context.SecurityContextPersistenceFilter@6e92c6ba, org.springframework.security.web.header.HeaderWriterFilter@5e1e9030, org.springframework.security.web.authentication.logout.LogoutFilter@1c82fe48, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7e301086, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d9663a6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77a3e734, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@be8dbc1, org.springframework.security.web.session.SessionManagementFilter@3d207e8, org.springframework.security.web.access.ExceptionTranslationFilter@7b8907c1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@347eae58]
+2024-09-16 11:17:08.579  INFO 30136 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-16 11:17:08.580  INFO 30136 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-09-16 11:17:08.650  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5443 (https) 5051 (http) with context path ''
+2024-09-16 11:17:08.654  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Started Application in 0.642 seconds (JVM running for 366.21)
+2024-09-16 11:17:08.654  INFO 30136 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-16 11:17:25.195  INFO 30136 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:17:25.196  INFO 30136 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2024-09-16 11:17:25.200  INFO 30136 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2024-09-16 11:17:25.251  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Starting Application using Java 11.0.24 on MBP-HRPGHRW39C with PID 30136 (/Users/antonio.carnevale/Documents/MicroServices/articoli-web-service/target/classes started by antonio.carnevale in /Users/antonio.carnevale/Documents/MicroServices/articoli-web-service)
+2024-09-16 11:17:25.251  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : No active profile set, falling back to default profiles: default
+2024-09-16 11:17:25.340  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-16 11:17:25.343  INFO 30136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 1 JPA repository interfaces.
+2024-09-16 11:17:25.383  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5443 (https) 5051 (http)
+2024-09-16 11:17:25.384  INFO 30136 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-16 11:17:25.384  INFO 30136 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2024-09-16 11:17:25.388  INFO 30136 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-16 11:17:25.388  INFO 30136 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 136 ms
+2024-09-16 11:17:25.417  INFO 30136 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-16 11:17:25.418  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2024-09-16 11:17:25.433  INFO 30136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2024-09-16 11:17:25.434  INFO 30136 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2024-09-16 11:17:25.457  INFO 30136 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 11:17:25.457  INFO 30136 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:17:25.505  WARN 30136 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-16 11:17:25.656  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**', OPTIONS] with []
+2024-09-16 11:17:25.661  INFO 30136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@189ff11d, org.springframework.security.web.context.SecurityContextPersistenceFilter@50387b6e, org.springframework.security.web.header.HeaderWriterFilter@5da9ec20, org.springframework.security.web.authentication.logout.LogoutFilter@63e1a01a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@13f9aca4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@597197be, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b2bb85c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78a14fd1, org.springframework.security.web.session.SessionManagementFilter@38307622, org.springframework.security.web.access.ExceptionTranslationFilter@30373ee1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d36ca30]
+2024-09-16 11:17:25.805  INFO 30136 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-16 11:17:25.807  INFO 30136 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-09-16 11:17:25.878  INFO 30136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5443 (https) 5051 (http) with context path ''
+2024-09-16 11:17:25.881  INFO 30136 --- [restartedMain] com.xantrix.webapp.ArticoliWebService           : Started Application in 0.642 seconds (JVM running for 383.438)
+2024-09-16 11:17:25.882  INFO 30136 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-16 11:18:01.601  INFO 30136 --- [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-16 11:18:01.603  INFO 30136 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2024-09-16 11:18:01.606  INFO 30136 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
