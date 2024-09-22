@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "PriceArtService", url="http://localhost:5071") // configuration = FeignConfiguration.class)
+@FeignClient(name = "PriceArtService")
 public interface PriceClient {
 
     @GetMapping(value = "/api/prezzi/{codart}")

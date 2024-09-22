@@ -67,6 +67,8 @@ public class ArticoliController {
 				prezzo*= 100;
 				prezzo = Math.round(prezzo);
 				prezzo/= 100;
+			} else {
+				prezzo = prezzoDto.getPrezzo();
 			}
 
 		} catch (FeignException ex) {

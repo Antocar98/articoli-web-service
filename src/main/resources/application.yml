@@ -5,8 +5,10 @@ server:
   port: 5051
 
 spring:
+
   application:
     name: ArticoliWebService
+
   #==========================================================
   #= PARAMETRI DBMS POSTGRESQL
   #==========================================================
@@ -26,8 +28,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
+
 #==========================================================
-#Opzioni Accesso Servizio gestuser
+# Opzioni Accesso Servizio gestuser
 #==========================================================
 gestuser:
   srvUrl: http://localhost:8100/api/utenti/cerca/userid/
@@ -48,13 +51,9 @@ sicurezza:
 # ==============================================================
 logging:
   file:
-    name: './logs/ArtSrv.log' #file inserito nella cartella logs
-    #path: "/logs"
+    name: './logs/ArtSrv.log' # file inserito nella cartella logs
   pattern:
     file: "%d{ dd-MM-yyyy } [%thread] %-5level %logger{36} - %msg%n"
-    #console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
-
-  # Livello del Log generale (default INFO)
   level:
     root: INFO
     # Livello di log specifico
@@ -63,3 +62,39 @@ logging:
     org.springframework.web: INFO
     com.xantrix.webapp.controller: INFO
     com.xantrix.webapp.feign.PriceClient: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
+
+# ==============================================================
+# = Feign Parameters
+# ==============================================================
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 300000 # 5 minuti
+        read-timeout: 300000
+
+# ==============================================================
+# = Configurazione Actuator
+# ==============================================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# ==============================================================
+# = Eureka Properties
+# ==============================================================
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
