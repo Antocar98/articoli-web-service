@@ -38,13 +38,6 @@ gestuser:
   password: BimBumBam_2018
 
 # ==============================================================
-# = Parametri Sicurezza JWT
-# ==============================================================
-sicurezza:
-  header: Authorization
-  secret: $aBcDeFgHiJkLmNoPqRsTuVwXyZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
-
-# ==============================================================
 # = Proprietà Livello Log
 # = Default ERROR, WARN e INFO
 # = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF

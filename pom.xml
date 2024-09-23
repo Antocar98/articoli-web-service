@@ -38,12 +38,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-		<!-- Spring Security: gestisce autenticazione e autorizzazione -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
 		<!-- Spring Open Feign -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -129,12 +123,6 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.9</version> <!-- Versione aggiornata per il supporto a OpenAPI 3 -->
-		</dependency>
-		<!-- JWT -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
 
