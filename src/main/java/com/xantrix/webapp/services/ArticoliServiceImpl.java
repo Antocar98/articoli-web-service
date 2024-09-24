@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.netflix.discovery.converters.Auto;
+import com.xantrix.webapp.dtos.PrezzoDto;
 import com.xantrix.webapp.entities.Barcode;
+import com.xantrix.webapp.feign.PriceClient;
+import feign.FeignException;
 import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -38,6 +44,12 @@ public class ArticoliServiceImpl implements ArticoliService
 	@Autowired
 	CacheManager cacheManager;
 
+	@Autowired
+	private CircuitBreakerFactory<?,?> circuitBreakerFactory;
+
+	@Autowired
+	private PriceClient priceClient;
+
 	@Override
 	@Cacheable
 	public List<ArticoliDto> SelByDescrizione(String descrizione)
@@ -60,6 +72,41 @@ public class ArticoliServiceImpl implements ArticoliService
 		return ConvertToDto(articoli);
 
 
+	}
+
+	@Override
+	public double getPriceArt(String CodArt, String IdList, String Header)
+	{
+		Double Prezzo = 0.00;
+
+		CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
+
+		try
+		{
+			String listino = (IdList == null) ? "" : IdList;
+
+			Prezzo = (!listino.isEmpty()) ?
+					circuitBreaker.run(() -> priceClient.getPriceArt(Header, CodArt, listino),
+							throwable -> SelPrezzoFallBack(Header, CodArt)) :
+					circuitBreaker.run(() -> priceClient.getDefPriceArt(Header, CodArt),
+							throwable -> SelPrezzoFallBack(Header, CodArt));
+
+			log.info("Prezzo Articolo " + CodArt + ": " + Prezzo);
+
+		}
+		catch(FeignException ex)
+		{
+			log.warning(String.format("Errore: %s", ex.getLocalizedMessage()));
+		}
+
+		return Prezzo;
+	}
+
+	public double SelPrezzoFallBack(String Header, String CodArt)
+	{
+		log.warning("****** SelPrezzoFallBack in esecuzione *******");
+
+		return priceClient.getDefPriceArt(Header, CodArt);
 	}
 
 	@Override

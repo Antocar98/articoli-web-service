@@ -44,7 +44,7 @@ gestuser:
 # ==============================================================
 logging:
   file:
-    name: './logs/ArtSrv.log' # file inserito nella cartella logs
+    name: '/Users/antonio.carnevale/Documents/Repository/Microservices/logs/ArtWebApi.log' # file inserito nella cartella logs
   pattern:
     file: "%d{ dd-MM-yyyy } [%thread] %-5level %logger{36} - %msg%n"
   level:
@@ -90,4 +90,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+      defaultZone: http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/,http://user:BimBumBam_2018@localhost:8763/eureka/

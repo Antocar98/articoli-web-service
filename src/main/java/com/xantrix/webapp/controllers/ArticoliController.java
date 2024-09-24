@@ -49,34 +49,7 @@ public class ArticoliController {
 	@Autowired
 	private ResourceBundleMessageSource errMessage;
 
-	@Autowired
-	private PriceClient priceClient;
 
-	private double getPriceArt(String codArt, String idList, String header)
-	{
-		double prezzo = 0;
-		try{
-
-			PrezzoDto prezzoDto = (!idList.isEmpty() ? priceClient.getPriceArt2(header,codArt,idList):
-					priceClient.getDefPriceArt2(header,codArt));
-
-			log.info("Prezzo articolo "+ codArt + ": " + prezzoDto.getPrezzo());
-
-			if(prezzoDto.getSconto()>0) {
-				prezzo = prezzoDto.getPrezzo() * (1 - (prezzoDto.getPrezzo() /100));
-				prezzo*= 100;
-				prezzo = Math.round(prezzo);
-				prezzo/= 100;
-			} else {
-				prezzo = prezzoDto.getPrezzo();
-			}
-
-		} catch (FeignException ex) {
-			log.warning(String.format("Errore: %s",ex.getLocalizedMessage()));
-		}
-
-		return prezzo;
-	}
 
 
 	@Operation(summary = "Ricerca l'articolo per BARCODE", description = "Restituisce i dati dell'articolo in formato JSON",
@@ -103,7 +76,7 @@ public class ArticoliController {
 			throw new NotFoundException(ErrMsg);
 		}
 
-		articolo.setPrezzo(getPriceArt(articolo.getCodArt(),"",authHeader));
+		articolo.setPrezzo(articoliService.getPriceArt(articolo.getCodArt(),"",authHeader));
 
 		return new ResponseEntity<>(articolo, HttpStatus.OK);
 	}
@@ -133,7 +106,7 @@ public class ArticoliController {
 			log.warning(ErrMsg);
 			throw new NotFoundException(ErrMsg);
 		} else{
-			articolo.setPrezzo(this.getPriceArt(articolo.getCodArt(),idList,authHeader));
+			articolo.setPrezzo(articoliService.getPriceArt(articolo.getCodArt(),idList,authHeader));
 		}
 
 		return new ResponseEntity<>(articolo, HttpStatus.OK);
@@ -163,7 +136,7 @@ public class ArticoliController {
 			throw new NotFoundException(ErrMsg);
 		} else {
 			articoli.forEach(articoliDto -> {
-				articoliDto.setPrezzo(getPriceArt(articoliDto.getCodArt(),idList, authHeader));
+				articoliDto.setPrezzo(articoliService.getPriceArt(articoliDto.getCodArt(),idList, authHeader));
 			});
 		}
 
