@@ -1,0 +1,77 @@
+#==========================================================
+#= Articoli Web Service - Autenticazione JWT
+#==========================================================
+spring:
+
+  application:
+    name: ArticoliWebService
+
+  cloud:
+    # ==============================================================
+    # = Proprietà Config Server
+    # ==============================================================
+
+    config:
+      #uri: http://localhost:8888
+      profile: ${profile}
+      label: ${ramo}
+      fail-fast: true
+      request-connect-timeout: 5
+      retry:
+        max-attempts: 10
+        max-interval: 1500
+      username: user
+      password: BimBumBam_2018
+
+      discovery:
+        serviceId: CONFIGSERVER
+        enabled: true
+
+
+# ==============================================================
+# = Proprietà Livello Log
+# = Default ERROR, WARN e INFO
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+# ==============================================================
+logging:
+  file:
+    name: '/Users/antonio.carnevale/Documents/Repository/Microservices/logs/ArtWebApi.log' # file inserito nella cartella logs
+  pattern:
+    file: "%d{ dd-MM-yyyy } [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    # Livello di log specifico
+    org.springframework.security: DEBUG
+    org.hibernate: INFO
+    org.springframework.web: INFO
+    com.xantrix.webapp.controller: INFO
+    com.xantrix.webapp.feign.PriceClient: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
+
+# ==============================================================
+# = Eureka Properties
+# = Nota: prima di attivare il servizio servono tre heartbeat
+# ==============================================================
+eureka:
+  # ==============================================================
+  # = Impostazioni Instance
+  # ==============================================================
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${server.port}-${spring.application.name}-${seq}
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+  # ==============================================================
+  # = Impostazioni Client
+  # ==============================================================
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/
+    #time out di connessione in secondi al server Eureka (def 5 sec)
+    eureka-server-connect-timeout-seconds: 8

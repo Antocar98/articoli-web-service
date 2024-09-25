@@ -25,7 +25,5 @@ public interface ArticoliService
 
 	public void InsArticolo(Articoli articolo);
 
-	public void CleanCache();
-
 	public double getPriceArt(String codArt, String idList, String header);
 }
