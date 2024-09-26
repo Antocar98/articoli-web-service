@@ -29,9 +29,9 @@ jobs:
     - name: Build Docker image
       run: docker build -t local-image/test-app:latest .
 
-    # Salva l'immagine Docker in un file tar con estensione diversa
+    # Salva l'immagine Docker in un file tar con il nome corretto
     - name: Save Docker image to file
-      run: docker save -o my-docker-image.dockerimage local-image/test-app:latest
+      run: docker save -o articoli-service.tar local-image/test-app:latest
 
     # Carica il file come artifact per poterlo scaricare
     - name: Upload Docker image as artifact
