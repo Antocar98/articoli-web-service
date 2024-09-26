@@ -1,6 +1,7 @@
 package com.xantrix.webapp.repository;
 
 import com.xantrix.webapp.entities.Articoli;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+@RefreshScope
 public interface ArticoliRepository extends PagingAndSortingRepository<Articoli, String> {
 
     Articoli findByCodArt(String codArt);

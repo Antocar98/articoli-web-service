@@ -22,10 +22,12 @@ import com.xantrix.webapp.entities.FamAssort;
 import com.xantrix.webapp.entities.Ingredienti;
 import com.xantrix.webapp.entities.Iva;
 import com.xantrix.webapp.repository.ArticoliRepository;
+import org.springframework.test.context.TestPropertySource;
 
 
 @SpringBootTest()
 @TestMethodOrder(OrderAnnotation.class)
+@TestPropertySource(properties = {"profile = test", "seq = 1", "ramo = main"})
 public class ArticoliRepositoryTest
 {
 	
