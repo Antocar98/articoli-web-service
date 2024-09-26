@@ -25,19 +25,17 @@ jobs:
     - name: Build with Maven (skip tests)
       run: mvn clean install -DskipTests
 
-# Costruisci l'immagine Docker
-- name: Build Docker image
-  run: docker build -t local-image/test-app:latest .
+    # Costruisci l'immagine Docker
+    - name: Build Docker image
+      run: docker build -t local-image/test-app:latest .
 
-# Salva l'immagine Docker in un file tar con estensione diversa
-- name: Save Docker image to file
-  run: docker save -o my-docker-image.dockerimage local-image/test-app:latest
+    # Salva l'immagine Docker in un file tar con estensione diversa
+    - name: Save Docker image to file
+      run: docker save -o my-docker-image.dockerimage local-image/test-app:latest
 
-# Carica il file come artifact per poterlo scaricare
-- name: Upload Docker image as artifact
-  uses: actions/upload-artifact@v3
-  with:
-    name: docker-image
-    path: my-docker-image.dockerimage
-
-        path: my-docker-image.tar
+    # Carica il file come artifact per poterlo scaricare
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-image
+        path: my-docker-image.dockerimage
