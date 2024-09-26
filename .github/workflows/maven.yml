@@ -25,14 +25,17 @@ jobs:
     - name: Build with Maven (skip tests)
       run: mvn clean install -DskipTests
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
+ # Costruisci l'immagine Docker
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/test/github-action:latest .
+      run: docker build -t local-image/test-app:latest .
 
-    - name: Push Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/test/github-action:latest
+    # Salva l'immagine Docker in un file tar
+    - name: Save Docker image to file
+      run: docker save -o my-docker-image.tar local-image/test-app:latest
+
+    # Carica il file tar come artifact per poterlo scaricare
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-image
+        path: my-docker-image.tar
