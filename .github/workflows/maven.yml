@@ -37,5 +37,5 @@ jobs:
     - name: Upload Docker image as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: docker-image
-        path: my-docker-image.dockerimage
+        name: docker-tar
+        path: articoli-service.tar
