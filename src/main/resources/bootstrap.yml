@@ -72,6 +72,6 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/
+      defaultZone: http://user:BimBumBam_2018@eureka-server:8761/eureka/,http://user:BimBumBam_2018@eureka-server:8762/eureka/
     #time out di connessione in secondi al server Eureka (def 5 sec)
     eureka-server-connect-timeout-seconds: 8
